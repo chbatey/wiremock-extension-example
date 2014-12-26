@@ -1,9 +1,10 @@
 apply plugin: 'java'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    compile 'com.github.tomakehurst:wiremock:1.52'
+    compile 'info.batey:wiremock:1.52'
 }
