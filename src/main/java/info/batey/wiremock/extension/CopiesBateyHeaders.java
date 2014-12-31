@@ -28,4 +28,9 @@ public class CopiesBateyHeaders extends ResponseTransformer {
     public String name() {
         return "CopiesBateyHeaders";
     }
+
+    @Override
+    public boolean applyGlobally() {
+        return true;
+    }
 }
