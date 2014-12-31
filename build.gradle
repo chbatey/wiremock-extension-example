@@ -6,5 +6,5 @@ repositories {
 }
 
 dependencies {
-    compile 'info.batey:wiremock:1.52'
+    compile 'com.github.tomakehurst:wiremock:1.53'
 }

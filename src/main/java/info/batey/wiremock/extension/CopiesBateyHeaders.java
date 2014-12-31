@@ -1,13 +1,18 @@
 package info.batey.wiremock.extension;
 
-import com.github.tomakehurst.wiremock.http.*;
+import com.github.tomakehurst.wiremock.extension.ResponseTransformer;
+import com.github.tomakehurst.wiremock.http.HttpHeader;
+import com.github.tomakehurst.wiremock.http.HttpHeaders;
+import com.github.tomakehurst.wiremock.http.Request;
+import com.github.tomakehurst.wiremock.http.ResponseDefinition;
 
 import java.util.Collection;
 import java.util.Set;
 
-public class CopiesBateyHeaders implements WiremockExtension {
+public class CopiesBateyHeaders extends ResponseTransformer {
+
     @Override
-    public ResponseDefinition filter(Request request, ResponseDefinition responseDefinition) {
+    public ResponseDefinition transform(Request request, ResponseDefinition responseDefinition) {
         Collection<HttpHeader> originalResponseHeaders = responseDefinition.getHeaders().all();
         Set<String> allHeaderKeys = request.getAllHeaderKeys();
         for (String headerName : allHeaderKeys) {
@@ -20,12 +25,7 @@ public class CopiesBateyHeaders implements WiremockExtension {
     }
 
     @Override
-    public String getName() {
-        return "Batey Header Copier";
-    }
-
-    @Override
-    public boolean isGlobal() {
-        return true;
+    public String name() {
+        return "CopiesBateyHeaders";
     }
 }
