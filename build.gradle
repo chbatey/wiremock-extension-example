@@ -6,5 +6,8 @@ repositories {
 }
 
 dependencies {
+    compile 'ch.qos.logback:logback-classic:1.1.2'
+    compile 'org.apache.httpcomponents:fluent-hc:4.3.6'
     compile 'com.github.tomakehurst:wiremock:1.53'
+    compile 'junit:junit:4.11'
 }
