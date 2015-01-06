@@ -19,20 +19,17 @@ public class CopiesBateyHeaders extends ResponseTransformer {
 
     @Override
     public ResponseDefinition transform(Request request, ResponseDefinition responseDefinition, FileSource files) {
-        HttpHeaders headers = responseDefinition.getHeaders();
-        Collection<HttpHeader> originalResponseHeaders;
-        if (headers == null) {
-            originalResponseHeaders = new ArrayList<HttpHeader>();
-        } else {
-            originalResponseHeaders = headers.all();
-        }
+        HttpHeaders stubbedResponseHeaders = responseDefinition.getHeaders();
+
+        Collection<HttpHeader> responseHeaders = stubbedResponseHeaders == null ? new ArrayList<HttpHeader>() : stubbedResponseHeaders.all();
+
         Set<String> allHeaderKeys = request.getAllHeaderKeys();
         for (String headerName : allHeaderKeys) {
             if (headerName.startsWith("Batey")) {
-                originalResponseHeaders.add(new HttpHeader(headerName, request.getHeader(headerName)));
+                responseHeaders.add(new HttpHeader(headerName, request.getHeader(headerName)));
             }
         }
-        responseDefinition.setHeaders(new HttpHeaders(originalResponseHeaders));
+        responseDefinition.setHeaders(new HttpHeaders(responseHeaders));
         return responseDefinition;
     }
 

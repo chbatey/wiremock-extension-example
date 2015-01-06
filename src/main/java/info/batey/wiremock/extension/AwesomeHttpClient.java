@@ -14,19 +14,15 @@ public class AwesomeHttpClient {
         this.host = host;
     }
 
-    public void callBatey() {
-        try {
-            HttpResponse httpResponse = Request.Get(host + "/batey-service")
-                    .addHeader("Batey-Auth", "super-token")
-                    .execute().returnResponse();
+    public void callBatey() throws IOException {
+        HttpResponse httpResponse = Request.Get(host + "/batey-service")
+                .addHeader("Batey-Auth", "super-token")
+                .execute().returnResponse();
 
-            Header authHeader = httpResponse.getFirstHeader("Batey-Auth");
+        Header authHeader = httpResponse.getFirstHeader("Batey-Auth");
 
-            if (authHeader == null) {
-                throw new NoBateyAuthHeader();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (authHeader == null) {
+            throw new NoBateyAuthHeader();
         }
     }
 }
